@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новогодний сайт</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('ded_moroz.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: #fff0e6;
+            transition: background-position 0.3s ease;
+            overflow: hidden;
+        }
+        .content {
+            text-align: center;
+            font-size: 24px;
+            font-style: oblique;
+            text-shadow:
+                -1px -1px 0 #ff0000,
+                 1px -1px 0 #ff0000,
+                -1px 1px 0 #ff0000,
+                 1px 1px 0 #ff0000;
+            position: relative;
+            z-index: 1;
+        }
+        .content::before {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 130px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 0 0 8px rgba(255, 0, 0, 0.5);
+            z-index: -1;
+        }
+        .content h1, .content p {
+            margin: 10px 0;
+            padding: 0 20px;
+        }
+        .button-container {
+            position: absolute;
+            bottom: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            z-index: 1;
+        }
+        .button {
+            padding: 8px 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            filter: saturate(70%);
+        }
+        .button:hover {
+            background-color: #ff66cc;
+            filter: saturate(10%);
+        }
+        .button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px #ff0066;
+        }
+       .message-container {
+
+            text-align: center;
+            width: 90%; /* Увеличенная ширина */
+            height: 200px;/* Увеличенная высота рамки */
+            font-size: 20px;                     font-style: italic;
+            position: relative;
+             z-index: 1;
+             color: #fff0e6;
+             text-shadow:
+                -1px -1px 0 #ff0000,
+                 1px -1px 0 #ff0000,
+                -1px 1px 0 #ff0000,
+                 1px 1px 0 #ff0000;
+              padding-bottom: -350px; /* Увеличенная нижняя отбивка */
+        }
+         .message-container::before {
+            content: '';
+            position: absolute;
+            bottom: -40px; /*Увеличенно расстояние чтобы рамка опускалась*/
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%; /* Увеличенная ширина */
+            height: 180px;/* Увеличенная высота рамки */
+            background-color: white;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 0 0 8px rgba(255, 0, 0, 0.5);
+            z-index: -1;
+        }
+        .back-button {
+             position: absolute;
+             bottom: -40 px; /* Положение кнопки 'назад' ниже */
+             left: 50%;
+             transform: translateX(-50%);
+             padding: 8px 20px;
+             background-color: red;
+             color: white;
+             border: none;
+             border-radius: 5px;
+             cursor: pointer;
+             transition: all 0.3s ease;
+             font-weight: bold;
+             filter: saturate(70%);
+
+        }
+        .back-button:hover {
+            background-color: #ff66cc;
+             filter: saturate(10%);
+        }
+           .back-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px #ff0066;
+        }
+         .hidden {
+           display: none;
+         }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1> Скоро Новый Год</h1>
+        <p>Ты готов к моим теплым поздравлениям?</p>
+    </div>
+
+    <div class="button-container">
+        <button class="button" onclick="showMessage('yes')">Да</button>
+        <button class="button" onclick="showMessage('no')">Нет</button>
+    </div>
+
+    <div class="message-container hidden" id="message-container">
+        <p id="message-text"></p>
+        <button class="back-button" onclick="hideMessage()">Назад</button>
+    </div>
+
+    <script>
+        document.addEventListener('mousemove', function(event) {
+            const centerX = window.innerWidth / 2;
+                        const centerY = window.innerHeight / 2;
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+            const deltaX = (mouseX - centerX) / 20;
+            const deltaY = (mouseY - centerY) / 20;
+            document.body.style.backgroundPosition = `${50 + deltaX}% ${50 + deltaY}%`;
+        });
+
+        function showMessage(answer) {
+            const messageContainer = document.getElementById('message-container');
+            const messageText = document.getElementById('message-text');
+             const contentDiv = document.querySelector('.content');
+            const buttonContainer = document.querySelector('.button-container');
+
+
+            if (answer === 'yes') {
+                messageText.innerHTML = `С наступающим новым годом!
+                Пусть этот год принесет тебе море счастья,удачи и самых теплых моментов.<br>
+                Хочу пожелать тебе в этом году только всего самого наилучшего,вдохновения.<br>
+                Ты замечательный человек,и я знаю,что ты сможешь достичь всего,что задумал. <br>
+                Пусть сбываются все твои мечты,а я всегда буду рядом,чтобы тебя поддержать!<br>
+                С любовью и нежностью, Полинка`;
+            } else if (answer === 'no') {
+                messageText.innerHTML = `Очень жаль, что у тебя нет новогоднего настроения.<br>
+                    Но не отчаивайся,я надеюсь,что оно скоро появится! Может быть, стоит попробовать еще раз воскресить его?<br>
+                    Главное- не сдавайся и будь уверен в себе`;
+
+            }
+               contentDiv.style.display= 'none';
+             buttonContainer.style.display = 'none';
+            messageContainer.classList.remove('hidden');
+
+        }
+
+        function hideMessage(){
+           document.getElementById('message-container').classList.add('hidden');
+           document.querySelector('.button-container').style.display = 'flex';
+            document.querySelector('.content').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
